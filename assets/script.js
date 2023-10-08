@@ -67,10 +67,14 @@ function updateSlide(index) {
 arrowRight.addEventListener('click', () => {
     if (currentSlideIndex < slides.length - 1) {
         updateSlide(currentSlideIndex + 1);
-    } 
+    } else {
+        updateSlide(0);
+    }
 });
 arrowLeft.addEventListener('click', () => {
     if (currentSlideIndex > 0) {
         updateSlide(currentSlideIndex - 1);
-    } 
+    } else {
+        updateSlide(slides.length - 1);
+    }
 });
