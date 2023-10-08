@@ -19,16 +19,20 @@ const slides = [
 
 const arrowLeft = document.querySelector('.arrow_left');
 const arrowRight = document.querySelector('.arrow_right');
+const bannerImg = document.querySelector('.banner-img');
+const tagLine = document.querySelector('#banner p');
+const dotsContainer = document.querySelector('.dots');
 
-arrowLeft.addEventListener('click', function() {
+
+
+arrowLeft.addEventListener('click', () => {
 	console.log('Clic sur la flèche gauche');
   }); 
-arrowRight.addEventListener('click', function() {
+arrowRight.addEventListener('click', () => {
 	console.log('Clic sur la flèche droite');
   });
 
   
-const dotsContainer = document.querySelector('.dots');
 
 slides.forEach((slide, index) => {
     const dot = document.createElement('div');
@@ -41,3 +45,32 @@ slides.forEach((slide, index) => {
     }
 });
 
+
+
+let currentSlideIndex = 0;
+
+function updateSlide(index) {    
+    bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
+    tagLine.innerHTML = slides[index].tagLine;
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.add('dot_selected');
+        } else {
+            dot.classList.remove('dot_selected');
+        }
+    });
+
+    currentSlideIndex = index;
+}
+
+arrowRight.addEventListener('click', () => {
+    if (currentSlideIndex < slides.length - 1) {
+        updateSlide(currentSlideIndex + 1);
+    } 
+});
+arrowLeft.addEventListener('click', () => {
+    if (currentSlideIndex > 0) {
+        updateSlide(currentSlideIndex - 1);
+    } 
+});
